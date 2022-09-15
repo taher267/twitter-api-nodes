@@ -33,6 +33,21 @@ exports.twitterFileUploadTest = async (req, res, next) => {
       media_id: media_id_string,
     });
     console.log('finalize', finalize);
+    
+    
+    
+    exports.appending = async (token, token_secret, mediaId, media) => {
+  try {
+    return await twitApi(token, token_secret, 'mediaUpload', {
+      command: 'APPEND',
+      media_id: mediaId,
+      media,
+      segment_index: 0,
+    });
+  } catch (e) {
+    throw error(e.message || 'errr happend');
+  }
+};
     let updateStatuses = await twitApi(token, token_secret, 'statusesUpdate', {
       status: 'fljdkfjskfjsdkfjd',
       media_ids: media_id_string,
